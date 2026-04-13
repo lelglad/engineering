@@ -5,12 +5,12 @@ GPIO.setup(dac_bits,GPIO.OUT)
 dynamic_range = 3.3
 def voltage_to_number(voltage):
     if not(0.0 <= voltage <= dynamic_range):
-        print('Напряжение выходит за динамический диапазон ЦАП (0.00 - {dinamic_range:.2f} B)')
+        print(f'Напряжение выходит за динамический диапазон ЦАП (0.00 - {dynamic_range:.2f} B)')
         print('Устанавливаем 0.0 B')
         return 0
     return int(voltage/dynamic_range * 255)
 def number_to_dac(number):
-    bits = [int(element) for element in bin(number)[2:].zfill(8)]
+    bits = [int(element) for element in bin(number)[2:].zfill(8)][::-1]
     GPIO.output(dac_bits,bits)
     return(f'Число на вход ЦАП: {number}, биты: {bits}')
 
