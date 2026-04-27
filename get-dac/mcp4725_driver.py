@@ -33,7 +33,7 @@ class MCP4725:
         self.set_number(number)
 if __name__=="__main__":
     try:
-        dac = MCP4725(5.11, address = 0x61,verbose = True)
+        dac = MCP4725(4, address = 0x61,verbose = True)
         while True:
             try:
                 voltage = float(input("Введите напряжение в Вольтах: "))

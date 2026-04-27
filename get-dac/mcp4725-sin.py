@@ -1,11 +1,12 @@
 import mcp4725_driver as mcp
 import signal_generator as sg
 import time
-amplitude = 3.2
+amplitude = 4
 signal_frequency = 10
 sampling_frequency = 500
+dac = None
 try:
-    dac = mcp.MCP4725(bus = 1, address = 0x60)
+    dac = mcp.MCP4725(5,address = 0x61,verbose = False)
     start_time = time.time()
     while True:
         current_time = time.time() - start_time
@@ -13,4 +14,5 @@ try:
         dac.set_voltage(voltage)
         sg.wait_for_sampling_period(sampling_frequency)
 finally:
-    dac.deinit()
+    if dac is not None:
+        dac.deinit()
